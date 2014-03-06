@@ -1,0 +1,62 @@
+template(name,_vars,_ptrs, o_ptr, i_ptr_ws,size) ::=<<#include \<stdio.h\>
+#include \<cutil_inline.h\>
+
+
+void extern timerstart(char* name);
+void extern timerend();
+
+// Device code
+__device__ void <name>_main(<i_ptr_ws:{s|<s.parameter>}; separator=",">, int opt)
+{
+/* Sample Vector add code 
+ C[opt]=A[opt]+ B[opt];
+*/
+
+
+}
+
+//This kernel distributes the work irrespective of the size
+__global__ void <name>_kernel(<_ptrs:{s|<s.parameter>}; separator=",">,<_vars:{s|<s.parameter>}; separator=",">)
+{
+    const int      tid = blockDim.x * blockIdx.x + threadIdx.x;
+    const int THREAD_N = blockDim.x * gridDim.x;
+
+    for(int opt = tid; opt \< <size>; opt += THREAD_N){
+          <name>_main(<i_ptr_ws:{s|<s.name>}; separator=",">,opt);    
+	}
+}
+
+// Host code
+<o_ptr.tType>* abstract_<name>(<_ptrs:{s|<s.parameter>}; separator=",">,<_vars:{s|<s.parameter>}; separator=",">)
+{
+	    timerstart("CUDA");
+<_ptrs:{s| <s.type>* d_<s.name> ; }; separator="\n">
+
+    // Allocate vectors in device memory
+    <_ptrs:{s|cutilSafeCall( cudaMalloc((void**)&d_<s.name>, sizeof(<s.type>)*<s.size>)) ; }; separator="\n">
+    
+    // Copy variables from host memory to device memory
+   
+    <_ptrs:{s| cutilSafeCall( cudaMemcpy(d_<s.name>,<s.name>, sizeof(<s.type>)*<s.size>,cudaMemcpyHostToDevice) ); }; separator="\n">
+    
+    // Kernel call with 480*256 threads
+    
+  
+     
+    <name>_kernel\<\<\<480, 256\>\>\>(<_ptrs:{s|d_<s.name>}; separator=",">,<_vars:{s|<s.name>}; separator=",">);
+    
+    
+    cutilCheckMsg("kernel launch failure\n");
+    cutilSafeCall( cudaThreadSynchronize() );
+
+    // Copy variables from device memory to host memory
+      
+    <o_ptr:{s| cutilSafeCall( cudaMemcpy(<s.name>,d_<s.name>, sizeof(<s.type>)*<s.size>,cudaMemcpyDeviceToHost) ); }; separator="\n">
+    
+      <_ptrs:{s| if (d_<s.name>) cutilSafeCall( cudaFree(d_<s.name>)) ; }; separator="\n">
+      timerend();
+    
+    return <o_ptr.name>;
+    
+}
+>>

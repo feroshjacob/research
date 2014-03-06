@@ -1,0 +1,39 @@
+grammar cs.ua.edu.se.MapRedoop with org.eclipse.xtext.common.Terminals
+
+generate mapRedoop "http://www.ua.cs/edu/se/MapRedoop"
+
+MapRedoop: declaration=Declaration'{'(content+=Content)*'}' ;
+
+Content: entities=ListofEntities|mrBlocks=MRBlock;
+
+ListofEntities: {ListofEntities}'metaelements:''{'(entities+=Entity)*'}'; 
+
+MRBlock:'mapreduce:'loop='loop'? '{'mapper=Mapper reducer=Reducer '}';
+
+Declaration :'program' name=ID ('extend' superName=ID)?;
+
+Mapper:'map''('inkey=Argument','invalue=Argument ',' outKeyType=STRING ','outValueType=STRING')'text=Block;
+
+Reducer: 'reduce''('inkey=STRING','invalue=STRING ',' outKeyType=STRING ','outValueType=STRING')'text=Block;
+    
+Entity:'metaelement' name=ID ('extend' superType=[Entity])? '{'(features+=Feature)+ '}';
+ 
+Feature: type=TypeRef name=ID';'| readorWrite=ReadorWrite';';
+    
+ReadorWrite: 'read''(' token=STRING',' readval=STRING')'| 'write''(' token=STRING ','writeval=STRING')';
+  
+TypeRef: referenced=Type(multi?='*')?;
+
+ Block :  block='[' (javafunctions+=JavaFunction)* ']';
+
+JavaFunction: timeofCall=TimeOfCall ':' paramname=ID; 
+
+TimeOfCall:'after' | 'call' | 'before';
+
+ 
+Type: type='int'|type='float'|type='double'|type='text'|type='long' | name=ID ;
+ 
+Argument:type=Type argname=ID;
+
+ListofArgument:','type=Type argname=ID;
+  

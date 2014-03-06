@@ -1,0 +1,24 @@
+kernel Force in R
+
+// Kernel declarations
+	vector F
+	scalar M
+	constant K=1
+	
+ /*
+  * Read positions and mass from file
+  * Data is formatted as shown
+  *
+  */
+	read "<R_1 R_2 R_3>M","data.dat"
+
+	//Actual computation
+	F=K*M SUM(M*R/(R_*R_*R_))
+
+	// Write force to file 
+	write "F_1 F_2 F_3", "out.dat"
+	
+endkernel
+
+// Generate CUDA code for force kernel
+generate OMP[MAXPARNODE=1] ACCURATE Force. 

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Web interface for tPPModel</title>
+    <script type="text/javascript">
+    function validate()
+    {
+    var x=document.forms["tppform"]["cCode"].value
+    var y=document.forms["tppform"]["tppCode"].value
+
+    if (x==null || y==null|| x.length <1 || y.length<1)
+      {
+    	document.getElementById("errormessage").style.display="block";
+      return false;
+      }
+    }
+function populate(val){
+	document.forms["tppform"]["tppCode"].value="";
+	document.forms["tppform"]["cCode"].value="";
+	if(val.checked==true){
+		document.forms["tppform"]["cCode"].value="#include <stdio.h>\n"+
+	"#define TOTAL_SIZE 1000\n"+
+	"       int A[1000], B[1000],C[1000];\n"+
+	"\n"+
+	"void vectoradd()\n"+
+	"{\n"+
+	"       int i;\n"+
+	"       for(i=0;i<TOTAL_SIZE;i++)\n"+
+	"       {\n"+
+	"       C[i]= A[i]+B[i];                \n"+
+	"       }\n"+
+	"}\n"+
+	"void verify()\n"+
+	"{\n"+  
+	"       int i;\n"+
+	"       for(i=0;i<TOTAL_SIZE;i++)\n"+   
+	"       {\n"+
+	"       if(C[i]!=2)\n"+
+	"       {       \n"+
+	"               printf(\"Test failed\n\");\n"+
+	"               return;\n"+
+	"       }\n"+
+	"       }\n"+
+	"\n"+   
+	"       printf(\"Test passed\n\");\n"+
+	"}\n"+          
+	"int main() \n"+
+	"{\n"+
+	"       int i;\n"+
+	"\n"+
+	"\n"+
+	"       for( i=0; i<TOTAL_SIZE;i++)\n"+
+	"       {\n"+
+	"               A[i]=1;\n"+
+	"               B[i]=1;\n"+
+	"       }\n"+
+	"       #pragma tppmodel vectorAdd\n"+
+	"       {\n"+
+	"               vectoradd();\n"+
+	"       }\n"+
+	"\n"+
+	"\n"+
+	"       verify();\n"+
+	"       return 0;\n"+
+	"}\n"+
+	"\n"+
+	"";
+
+	document.forms["tppform"]["tppCode"].value="       declare  vectorAdd [vectoradd.cpp] {\n"+
+		"       in A,B,C, TOTAL_SIZE\n"+
+		"       out C\n"+
+		"       }\n"+
+		"       map vectorAdd<-CUDA cuda_VA [VAcuda.cu], OMP omp_VA [VAomp.cpp], MPI omp_VA [VAmpi.cpp]\n"+
+		"                    \n"+
+		"       execute VACUDA_EXE cuda_VA.\n"+
+
+	"";
+	}
+	
+}
+</script>
+  </head>
+
+  <body>
+    <h2>Web interface for tPPModel</h2>
+     <font color="red"><b> Note:</b> check the vector add example checkbox and click generate code to see the demo</font>  <br/>
+    <div id="errormessage" style="display: none;"> <font color="red"> ERROR:Main program  and tpp files cannot be empty</font></div>
+	 <form action="webtppmodel" method="post" onsubmit="return validate();" name="tppform"><table>
+	<tr><td>Main program file</td><td><textarea id="cCode" name="cCode"  rows="20" cols="100"></textarea></td>
+	    <td><input type="checkbox" onchange="populate(this)" /> Populate with Vectoradd example
+	</td></tr>
+	<tr><td>tPPModel file</td><td><textarea  id="tppCode" name="tppCode" rows="10" cols="100" ></textarea></td></tr>
+	<tr><td></td><td><input type="submit" name="Submit" value="Generate code"/></td></tr>
+</table></form>
+
+  </body>
+</html>

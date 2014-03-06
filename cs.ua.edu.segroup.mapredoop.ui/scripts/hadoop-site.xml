@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>/mnt/hadoop</value>
+</property>
+
+<property>
+  <name>fs.default.name</name>
+  <value>hdfs://ip-10-212-65-172.ec2.internal:50001</value>
+</property>
+
+<property>
+  <name>mapred.job.tracker</name>
+  <value>hdfs://ip-10-212-65-172.ec2.internal:50002</value>
+</property>
+
+<property>
+  <name>tasktracker.http.threads</name>
+  <value>80</value>
+</property>
+
+<property>
+  <name>mapred.tasktracker.map.tasks.maximum</name>
+  <value>3</value>
+</property>
+
+<property>
+  <name>mapred.tasktracker.reduce.tasks.maximum</name>
+  <value>3</value>
+</property>
+
+<property>
+  <name>mapred.output.compress</name>
+  <value>true</value>
+</property>
+
+<property>
+  <name>mapred.output.compression.type</name>
+  <value>BLOCK</value>
+</property>
+
+<property>
+  <name>dfs.client.block.write.retries</name>
+  <value>3</value>
+</property>
+
+</configuration>

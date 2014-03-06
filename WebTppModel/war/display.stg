@@ -1,0 +1,57 @@
+template(main_content,make_content, temp_content, abs_content) ::=<<
+\<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"\>
+\<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"\>
+\<head\>
+	\<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /\>
+	\<title\>tPPModel generated files\</title\>
+	\<script type="text/javascript" src="scripts/shCore.js"\>\</script\>
+	\<script type="text/javascript" src="scripts/shBrushJScript.js"\>\</script\>
+	\<link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/\>
+	\<script type="text/javascript"\>SyntaxHighlighter.all();\</script\>
+\<script type="text/javascript"\>
+function changecodepane(val){
+	document.getElementById("main").style.display="none";
+	document.getElementById("pp_abstract.h").style.display="none";
+    document.getElementById("Makefile").style.display="none";
+ <temp_content:{s| document.getElementById("temp_pane_<s.name>").style.display="none"; }; separator="\n">	
+ 
+    if(document.getElementById(val)==null) document.getElementById("temp_pane_"+val).style.display="block";
+    else document.getElementById(val).style.display="block";
+ 
+
+}
+\</script\>
+
+\</head\>
+
+  \<body\>
+  \<center\>
+    \<h2 \>Generated files from tPPModel \</h2\>
+    \<table border="0"\>
+	\<tr \>\<td width="10%" valign="top"\>
+	
+    
+    \<a href="javascript:changecodepane('main')" >main\</a\>    \<br/\> 
+    
+    \<a href="javascript:changecodepane('pp_abstract.h')" >pp_abstract.h\</a\>     \<br/\>  
+    \<a href="javascript:changecodepane('Makefile')" >Makefile\</a\>     \<br/\> 
+    
+    \<b\> Templates \</b\> \<br/\>
+       
+    <temp_content:{s| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<a href="javascript:changecodepane('<s.name>')" ><s.name>\</a\>     \<br/\>}; separator="\n">	
+    
+ \<br/\> 
+      
+    \</td\>\<td width="90%"\>
+		\<div id="Makefile" style="display: none; width:800px;height:600px;overflow:auto;"\> \<pre class='brush: js;'\><make_content.text> \</pre\>\</div\>
+		\<div id="main" style="display: block; width:800px;height:600px;overflow:auto;"\> \<pre class='brush: js;'\><main_content.text> \</pre\>\</div\>
+		\<div id="pp_abstract.h" style="display: none;width:800px;height:600px;overflow:auto;"\> \<pre class='brush: js;'\><abs_content.text> \</pre\>\</div\>
+  <temp_content:{s| \<div id="temp_pane_<s.name>" style="display: none;width:800px;height:600px;overflow:auto;"\> \<pre class='brush: js;'\><s.text> \</pre\>\</div\> }; separator="\n">
+		 \</td\>\</tr\>
+	
+\</table\>
+\</center\>
+
+  \</body\>
+\</html\>
+>>

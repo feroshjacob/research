@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: cs.ua.edu.segroup.mapredoop
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: cs.ua.edu.segroup.mapredoop; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ com.ibm.icu;resolution:=optional,
+ org.eclipse.xtext.xtend;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: cs.ua.edu.se,
+ cs.ua.edu.se.services,
+ cs.ua.edu.se.mapRedoop,
+ cs.ua.edu.se.mapRedoop.impl,
+ cs.ua.edu.se.mapRedoop.util,
+ cs.ua.edu.se.parseTreeConstruction,
+ cs.ua.edu.se.parser.antlr,
+ cs.ua.edu.se.parser.antlr.internal,
+ cs.ua.edu.se.validation

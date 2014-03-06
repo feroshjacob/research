@@ -1,0 +1,13 @@
+template(name,_vars,_ptrs, o_ptr,statement) ::=<<
+extern <o_ptr.tType>* abstract_<name>(<_ptrs:{s|<s.parameter>}; separator=",">,<_vars:{s|<s.parameter>}; separator=",">);
+SEPARATEDBY
+#pragma TPPMODEL <name>
+{
+#ifdef <name>_DEFINED
+	abstract_<name>(<_ptrs:{s|<s.name>}; separator=",">,<_vars:{s|<s.name>}; separator=",">);
+#else
+	 <statement>
+#endif
+}
+
+>>

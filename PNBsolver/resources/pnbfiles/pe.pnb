@@ -1,0 +1,7 @@
+kernel Potential
+scalar PE
+read "R_1 R_2 R_3","data.dat"
+write "PE", "out.dat"
+PE=Q SUM(Q/R)
+endkernel
+generate OMP[MAXPARNODE=1] ACCURATE Potential. 

@@ -1,0 +1,5 @@
+Testing for existing master in group: segroup
+Master already running on: ec2-50-17-127-41.compute-1.amazonaws.com
+Adding segroup node(s) to cluster group segroup with AMI ami-ce788aa7
+i-201cc44f
+i-3e1cc451

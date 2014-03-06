@@ -1,0 +1,93 @@
+<project name="RCF" basedir="." default="deployjar">
+
+  <description>This script can create the new jdk jar</description>
+	<property name="dump" value="/home/ferosh/research/cser" /> 
+	<property name="ECLIPSE" value="/home/ferosh/eclipse" /> 
+	<property name="BINJAR" value="org.eclipse.jdt.ui_3.5.2.r352_v20100106-0800.jar" /> 
+	<property name="SRCJAR" value="org.eclipse.jdt.ui.source_3.5.2.r352_v20100106-0800.jar" /> 
+	<property name="src" value="src" />
+	<property name="build" value="${dump}/build" />
+	
+ 	<property name="lib"  location="${ECLIPSE}/plugins/" />
+ 	<path id="pathlib">  
+ 		<fileset dir="${lib}"  />
+ 	</path>
+
+	  <target name="launch" description="" depends="deployjar" >
+	  	<java jar="${ECLIPSE}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080205.jar"            fork="true"
+           failonerror="true"
+           maxmemory="512m"> </java>
+	  	</target>
+
+	<target name="deployjar" description="" depends="makejar" >
+	 	<copy todir="${ECLIPSE}/plugins/" verbose="true" overwrite="true">
+	 	      <fileset dir="${dump}/jars" >
+	 	        <include name="*.jar" />
+	 	      </fileset>
+	 	    </copy>
+	 	</target>
+  <target name="makejar" description="" depends="makebinaryjar" />
+  
+  <target name="clean">
+  	<delete dir="${build}" />
+  	<delete dir="${dump}/src/rcf" />
+  	<delete dir="${dump}/bin/rcf" />
+     <delete file="${dump}/jars/${SRCJAR}" />
+  	<delete file="${dump}/jars/${BINJAR}" />
+  	<mkdir dir="${build}"/>
+  </target>
+	
+	  <target name="build" depends="clean">
+	    <javac srcdir="${src}"   
+	           destdir="${build}"
+	     	   debug="on" classpathref="pathlib" />
+	  </target>
+	
+
+  <target name="makebinaryjar" description="Copy binary " depends="build,makesourcejar">
+    <!--mkdir dir="target/war" />
+    <mkdir dir="customized" />
+    <unzip src="jbpm-console.war" dest="target/war" /-->
+  	<echo> copying binaries...</echo>
+    <copy todir="${dump}/bin" verbose="true" overwrite="true">
+      <fileset dir="${build}" excludes="rcf/*.*">
+        <include name="**/*.class" />
+      </fileset>
+    </copy>
+    <!--delete>
+      <fileset dir="target/war/WEB-INF/lib">
+        <include name="el-api.jar" />
+        <include name="el-ri.jar" />
+      </fileset>
+    </delete-->
+ 	<echo> making binary jar...</echo>
+    <zip destfile="${dump}/jars/${BINJAR}" >
+      <fileset dir="${dump}/bin" />
+    </zip>
+  </target>
+
+	<target name="makesourcejar" description="Copy source" depends="clean">
+	    <!--mkdir dir="target/war" />
+	    <mkdir dir="customized" />
+	    <unzip src="jbpm-console.war" dest="target/war" /-->
+	 	<echo> copying source files....</echo>
+
+	    <copy todir="${dump}/src" overwrite="true" verbose="true">
+	      <fileset dir="${src}" excludes="rcf/*.*">
+	        <include name="**/*.java" />
+	      </fileset>
+	    </copy>
+	    <!--delete>
+	      <fileset dir="target/war/WEB-INF/lib">
+	        <include name="el-api.jar" />
+	        <include name="el-ri.jar" />
+	      </fileset>
+	    </delete-->
+	 	<echo> making source jar...</echo>
+	    <zip destfile="${dump}/jars/${SRCJAR}">
+	      <fileset dir="${dump}/src" />
+	    </zip>
+	  </target>
+
+
+</project>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/cs.ua.edu.segroup.mapredoop/src-gen"
+    editDirectory="/cs.ua.edu.segroup.mapredoop.edit/src" editorDirectory="/cs.ua.edu.segroup.mapredoop.editor/src"
+    modelPluginID="cs.ua.edu.segroup.mapredoop" forceOverwrite="true" modelName="MapRedoop"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="cs.ua.edu.segroup.mapredoop.edit"
+    editorPluginID="cs.ua.edu.segroup.mapredoop.editor">
+  <genPackages prefix="MapRedoop" basePackage="cs.ua.edu.se" disposableProviderFactory="true"
+      ecorePackage="MapRedoop.ecore#/">
+    <genClasses ecoreClass="MapRedoop.ecore#//MapRedoop">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//MapRedoop/declaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//MapRedoop/content"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Content">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Content/entities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Content/mrBlocks"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//ListofEntities">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//ListofEntities/entities"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//MRBlock">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//MRBlock/loop"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//MRBlock/mapper"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//MRBlock/reducer"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Declaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Declaration/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Declaration/superName"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Mapper">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Mapper/inkey"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Mapper/invalue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Mapper/outKeyType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Mapper/outValueType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Mapper/text"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Argument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Argument/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Argument/argname"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//ListofArgument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//ListofArgument/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//ListofArgument/argname"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Reducer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Reducer/inkey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Reducer/invalue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Reducer/outKeyType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Reducer/outValueType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Reducer/text"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Type/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Type/name"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Entity/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Entity/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Entity/features"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Feature">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Feature/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Feature/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Feature/readorWrite"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//ReadorWrite">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//ReadorWrite/token"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//ReadorWrite/readval"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//ReadorWrite/writeval"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//TypeRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//TypeRef/referenced"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//TypeRef/multi"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//Block">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//Block/block"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MapRedoop.ecore#//Block/javafunctions"/>
+    </genClasses>
+    <genClasses ecoreClass="MapRedoop.ecore#//JavaFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//JavaFunction/timeofCall"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MapRedoop.ecore#//JavaFunction/paramname"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
